@@ -1,23 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Sliders from "./components/Slider/Sliders";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>This is a School App</h2>
+      <p>look mama i can code now</p>
+      <Sliders />
     </div>
   );
 }
