@@ -10,8 +10,7 @@ import { ImLinkedin } from 'react-icons/im';
 import { BsTelephoneFill } from 'react-icons/bs';
 const Contact = () => {
     return (
-        <div data-aos="fade-up"
-            data-aos-anchor-placement="center-bottom">
+        <div>
             <div className='pb-10 bg-slate-200'>
                 <h1 className='text-3xl text-orange-500 font-cursive mx-auto text-center font-bold'>Contact Us</h1><br />
 
@@ -29,7 +28,7 @@ const Contact = () => {
                             +880 1407941658
                         </span>
                     </div>
-                    <div>
+                    <div  data-aos="fade-up">
                         <h2 className='text-2xl font-bold text-orange-500'><GrMail></GrMail> Mail</h2>
                         <span className=' font-semibold'>
                             Your Mail.dhaka@gmail.com <br />
