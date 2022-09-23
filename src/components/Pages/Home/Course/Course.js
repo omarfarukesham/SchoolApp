@@ -14,6 +14,7 @@ const Course = ({course}) => {
                  <div className="flex justify-between">
                     <div>
                        <p>{Class}</p>
+                       
                     </div>
                     <div>
                       <p>Students: {students}</p>
