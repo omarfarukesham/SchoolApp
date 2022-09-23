@@ -4,9 +4,9 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { Autoplay, EffectCoverflow, Navigation, Pagination } from "swiper";
-import Images_1 from '../../../../asset/sliders/s1.jpg'
-import Images_2 from '../../../../asset/sliders/s2.jpg'
-import Images_3 from '../../../../asset/sliders/s3.jpg'
+import Images_1 from "../../../../asset/sliders/s1.jpg";
+import Images_2 from "../../../../asset/sliders/s2.jpg";
+import Images_3 from "../../../../asset/sliders/s3.jpg";
 
 export default function Sliders() {
   return (
@@ -36,7 +36,9 @@ export default function Sliders() {
         className="mySwiper"
       >
         <SwiperSlide>
-          <img src={Images_1} alt="slider 1" />
+          <div className="block">
+            <img width="100%" src={Images_1} alt="slider 1" />
+          </div>
         </SwiperSlide>
         <SwiperSlide>
           <img src={Images_2} alt="slider 2" />
