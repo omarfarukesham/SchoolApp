@@ -1,11 +1,10 @@
-import { useEffect } from "react";
-import "./App.css";
-import Contact from "./components/Contact/Contact";
-import Sliders from "./components/Slider/Sliders";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Wave from "react-wavify";
+import { useEffect } from "react";
+import { Home } from "./components/Pages/Home/Home";
+import Navbar from "./components/Shared/Navbar";
 import Footer from "./components/Shared/Footer";
+import Wave from "react-wavify";
 
 function App() {
   useEffect(() => {
@@ -13,10 +12,9 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <h2>This is a School App</h2>
-      <p>look mama i can code now</p>
-      <Sliders />
-      <Contact />
+      <Navbar />\
+      <Home />
+      <Footer />
       <Wave
         fill="#0f172a"
         paused={false}
@@ -27,7 +25,6 @@ function App() {
           points: 4,
         }}
       />
-      <Footer />
     </div>
   );
 }

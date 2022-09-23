@@ -3,17 +3,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-// import "./styles.css";
-
 import { Autoplay, EffectCoverflow, Navigation, Pagination } from "swiper";
-
-import s1 from "../../asset/sliders/s5.png";
-import s2 from "../../asset/sliders/s4.jpeg";
-import s3 from "../../asset/sliders/s6.jpg";
+import Images_1 from '../../../../asset/sliders/s1.jpg'
+import Images_2 from '../../../../asset/sliders/s2.jpg'
+import Images_3 from '../../../../asset/sliders/s3.jpg'
 
 export default function Sliders() {
   return (
-    <>
+    <div className="w-52 mx-auto">
       <Swiper
         effect={"coverflow"}
         spaceBetween={30}
@@ -39,15 +36,15 @@ export default function Sliders() {
         className="mySwiper"
       >
         <SwiperSlide>
-          <img src={s1} alt="slider 1" />
+          <img src={Images_1} alt="slider 1" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src={s2} alt="slider 2" />
+          <img src={Images_2} alt="slider 2" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src={s3} alt="slider 3" />
+          <img src={Images_3} alt="slider 3" />
         </SwiperSlide>
       </Swiper>
-    </>
+    </div>
   );
 }
