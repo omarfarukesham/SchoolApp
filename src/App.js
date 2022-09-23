@@ -1,13 +1,17 @@
-import "./App.css";
-import Sliders from "./components/Slider/Sliders";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from "react";
+import { Home } from './components/Pages/Home/Home';
 
 function App() {
+
+  useEffect(() => {
+    AOS.init()
+  }, [])
+
   return (
-    <div className="App">
-      <h1>Card section</h1>
-      <h2>This is a School App</h2>
-      <p>look mama i can code now</p>
-      <Sliders />
+    <div>
+      <Home />
     </div>
   );
 }
