@@ -3,14 +3,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-import { Autoplay, EffectCoverflow, Navigation, Pagination } from "swiper";
-import Images_1 from '../../../../asset/sliders/s1.jpg'
-import Images_2 from '../../../../asset/sliders/s2.jpg'
-import Images_3 from '../../../../asset/sliders/s3.jpg'
+import { Autoplay, Navigation, EffectCoverflow, Pagination } from "swiper";
+import Images_1 from "../../../../asset/sliders/img1.jpg";
+import Images_2 from "../../../../asset/sliders/img2.jpg";
+import Images_3 from "../../../../asset/sliders/img3.jpg";
+import Images_4 from "../../../../asset/sliders/img4.png";
 
 export default function Sliders() {
   return (
-    <div className="w-52 mx-auto">
+    <div className="w-3/5 mx-auto">
       <Swiper
         effect={"coverflow"}
         spaceBetween={30}
@@ -36,13 +37,18 @@ export default function Sliders() {
         className="mySwiper"
       >
         <SwiperSlide>
-          <img src={Images_1} alt="slider 1" />
+          <div className="block">
+            <img src={Images_1} alt="slider 1" />
+          </div>
         </SwiperSlide>
         <SwiperSlide>
           <img src={Images_2} alt="slider 2" />
         </SwiperSlide>
         <SwiperSlide>
           <img src={Images_3} alt="slider 3" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Images_4} alt="slider 4" />
         </SwiperSlide>
       </Swiper>
     </div>
