@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-
+import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const Navbar = () => {
    
       const [nav,setNav]=useState(false)
@@ -10,16 +11,27 @@ const Navbar = () => {
     return (
         <div>
            <div className='flex justify-between items-center text-left h-24 w-full bg-slate-900 mx-auto px-4 text-white'>
-      <h1 className='w-full text-3xl font-bold text-[#00df9a]'>Logo</h1>
-      <ul className='hidden md:flex'>
-       <li className='p-4'>Home</li>
- 
-     
-        <li className='p-4'>About</li>
-        <li className='p-4'>Contact</li>
-        <li className='p-4'>SignUP</li>
-        <li className='p-4'>Login</li>
-      </ul>
+             <h1 className='w-full text-3xl font-bold text-[#00df9a]'>Logo</h1>
+              <ul className='hidden md:flex'>
+                <NavLink to='/home'><li className='p-4'>Home</li></NavLink>
+                <ul class="menu menu-horizontal p-0"> 
+                <li tabindex="0">
+                  <a>
+                    <span>Dashboard</span>
+                  </a>
+                  <ul class="p-2 bg-slate-900 z-30">
+                    <NavLink to='/student'><li className="border-b border-gray-500 py-2 m-2">Student</li></NavLink>
+                    <NavLink to='/teacher'><li className="border-b border-gray-500 py-2 m-2">Teacher</li></NavLink>
+              
+                  </ul>
+                </li>
+                </ul>
+                  <NavLink to='/about'><li className='p-4'>About</li></NavLink>
+                  <NavLink to='/contact'><li className='p-4'>Contact</li></NavLink>
+                  <NavLink to='/signup'><li className='p-4'>SingUp</li></NavLink>
+                  <NavLink to='/login'><li className='p-4'>Login</li></NavLink>
+               
+              </ul>
       <div onClick={handleNav} className='block md:hidden'>
           {nav ? <AiOutlineClose size={20}/> : <AiOutlineMenu size={20} />}
       </div>
