@@ -5,15 +5,18 @@ import { Home } from "./components/Pages/Home/Home";
 import Navbar from "./components/Shared/Navbar";
 import Footer from "./components/Shared/Footer";
 import Wave from "react-wavify";
-
+import { Routes, Route, Link } from "react-router-dom"
 function App() {
   useEffect(() => {
     AOS.init();
   }, []);
   return (
     <div className="App">
-      <Navbar />\
-      <Home />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="home" element={<Home/>}/>
+      </Routes>
       <Footer />
       <Wave
         fill="#0f172a"

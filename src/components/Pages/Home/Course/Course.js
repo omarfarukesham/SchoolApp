@@ -6,7 +6,7 @@ const Course = ({course}) => {
     const {_id,name,Class,students,details,image,ratings}=course;
     return (
         <div>
-             <div>
+            <div>
             <div class="card bg-[#28334AFF] text-[#FBDE44FF] shadow-xl transition ease-in-out delay-150 hover:-translate-y-1">
             <figure><img className="mt-2" src={image} alt="Shoes" /></figure>
             <div class="card-body">
@@ -22,7 +22,7 @@ const Course = ({course}) => {
                     
                  </div>
                  <div>
-                            <Rating  initialRating={ratings} emptySymbol={<AiFillStar/>} fullSymbol={<AiFillStar style={{color:'goldenrod'}}/>}
+                            <Rating  initialRating={ratings} className="text-[#6e6e6d]" emptySymbol={<AiFillStar/>} fullSymbol={<AiFillStar className="text-[#FBDE44FF]"/>}
                   readonly
                   >
               </Rating>
