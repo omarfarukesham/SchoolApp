@@ -9,7 +9,7 @@ import { Autoplay, EffectCoverflow, Navigation, Pagination } from "swiper";
 
 import s1 from "../../asset/sliders/s5.png";
 import s2 from "../../asset/sliders/s4.jpeg";
-import s3 from "../../asset/sliders/s6.jpg";
+import s3 from "../../asset/sliders/s3.jpg";
 
 export default function Sliders() {
   return (
@@ -39,13 +39,13 @@ export default function Sliders() {
         className="mySwiper"
       >
         <SwiperSlide>
-          <img src={s1} alt="slider 1" />
+          <img className="rounded-xl" src={s1} alt="slider 1" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src={s2} alt="slider 2" />
+          <img className="rounded-xl" src={s2} alt="slider 2" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src={s3} alt="slider 3" />
+          <img className="rounded-xl" src={s3} alt="slider 3" />
         </SwiperSlide>
       </Swiper>
     </>
