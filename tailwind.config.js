@@ -15,5 +15,5 @@ module.exports = {
       "synthwave",
     ],
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui")]
 }

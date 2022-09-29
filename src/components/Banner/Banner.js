@@ -1,6 +1,6 @@
 import React from 'react';
 import noticeImg from '../../asset/noticeBoard.png'
-import Sliders from '../Slider/Sliders';
+// import Sliders from '../Slider/Sliders';
 const Banner = () => {
     return (
         <div className='grid lg:grid-cols-2 md:grid-cols-1'>
@@ -8,7 +8,7 @@ const Banner = () => {
                 <img className='rounded-xl' src={noticeImg} alt='noticeBoard' />
             </div>
             <div className='m-2'>
-                <Sliders></Sliders>
+                {/* <Sliders></Sliders> */}
             </div>
         </div>
     );
