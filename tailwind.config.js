@@ -1,23 +1,19 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{html,js}"],
-  theme: {
-    extend: {
-      fontFamily:
-      {
-        poppins:['Poppins']
-      }
-    },
-  },
-  plugins: [require("daisyui")],
+  
   daisyui: {
-    styled: true,
-    themes: true,
-    base: true,
-    utils: true,
-    logs: true,
-    rtl: false,
-    prefix: "",
-    darkTheme: "light",
+    themes: [
+      {
+        light: {
+          primary: "#640CF3",
+          secondary: "#F000B8",
+          accent: "#FFE810",
+          neutral: "#3d4451",
+          "base-100": "#ffffff",
+        },
+      },
+      "synthwave",
+    ],
   },
-};
+  plugins: [require("daisyui")]
+}
