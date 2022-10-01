@@ -11,6 +11,7 @@ import Login from "./components/Auth/Login";
 import Quiz from "./components/Quiz/Quiz";
 import Main from "./components/Dashboard/Main/Main";
 import Signup from "./components/Auth/Signup";
+import ResetPass from "./components/Auth/ResetPass";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
         <Route path="/Chat" element={<Chat />} />
         <Route path="/Quiz" element={<Quiz />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/reset-pass" element={<Signup />} />
+        <Route path="/reset-pass" element={<ResetPass />} />
       </Routes>
     </div>
   );
