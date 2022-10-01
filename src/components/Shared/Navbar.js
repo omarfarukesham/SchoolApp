@@ -10,10 +10,10 @@ const Navbar = () => {
       <>
                 <NavLink to='/home'><li className='p-4'>Home</li></NavLink>
                 <div className="flex-none mt-1">
-                <ul class="menu menu-horizontal p-0"> 
-                <li tabindex="0">
+                <ul className="menu menu-horizontal p-0"> 
+                <li tabIndex="0">
                  <span>Dashboard</span>
-                  <ul class="p-4 md:ml-6 ml-20 bg-slate-900 z-30">
+                  <ul className="p-4 md:ml-6 ml-20 bg-slate-900 z-30">
                     <NavLink to='/student'><li className=" py-2 m-2">Student</li></NavLink>
                     <NavLink to='/teacher'><li className=" py-2 m-2">Teacher</li></NavLink>
                   </ul>
@@ -27,7 +27,7 @@ const Navbar = () => {
                   <NavLink to='/login'><li className='p-4'>Login</li></NavLink>
                   <NavLink to='/cart'><li className='p-4'>
                   <div class="indicator">
-                      <span class="indicator-item badge badge-primary">1</span> 
+                      <span className="indicator-item badge badge-primary">1</span> 
                       <BsCartFill className="text-3xl"/>
                   </div>
                   </li></NavLink>
