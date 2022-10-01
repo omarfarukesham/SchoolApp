@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="bg-[url('/src/asset/LoginImg/loginImg1.jpg')] h-full bg-cover bg-no-repeat bg-center">
-      <div className="flex flex-wrap w-full h-screen ">
-        <div className="flex flex-col w-full md:w-1/2">
+    <div className="bg-[url('/src/asset/LoginImg/loginImg1.jpg')] h-screen bg-cover bg-no-repeat bg-center">
+      <div className="flex flex-wrap h-screen ">
+        <div className="flex flex-col w-full">
           <div className="flex flex-col justify-center px-8 pt-8 my-auto md:justify-start md:pt-0 md:px-24 lg:px-32">
             <div className="flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-lg shadow-xl sm:px-6 md:px-8 lg:px-10">
               <p className="text-3xl text-center mb-2">Welcome.</p>
@@ -107,7 +107,7 @@ const Login = () => {
                 </form>
               </div>
               <div className="flex items-center justify-center mt-6">
-                <div className="pt-2 pb-12 text-center">
+                <div className="pt-2 sm:pb-3 md:pb-12 text-center">
                   <Link
                     className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
                     to="/signup"
