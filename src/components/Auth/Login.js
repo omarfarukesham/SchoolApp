@@ -10,7 +10,7 @@ const Login = () => {
             <div className="flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-lg shadow-xl sm:px-6 md:px-8 lg:px-10">
               <p className="text-3xl text-center mb-2">Welcome.</p>
               <div className="self-center mb-8 text-xl font-light text-gray-600 sm:text-2xl ">
-                Sign in To Your Account
+                Login To Your Account
               </div>
               <div className="flex gap-4 item-center">
                 {/* Google button */}
@@ -88,7 +88,7 @@ const Login = () => {
                   <div className="flex items-center mb-6 -mt-4">
                     <div className="flex ml-auto">
                       <Link
-                        to="/resetpass"
+                        to="/reset-pass"
                         className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
                       >
                         Forgot Password?
@@ -101,7 +101,7 @@ const Login = () => {
                       type="submit"
                       className="py-2 mt-4 px-4  bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                     >
-                      Sign In
+                      Log in
                     </button>
                   </div>
                 </form>

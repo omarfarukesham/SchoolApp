@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Auth/Login";
 import Quiz from "./components/Quiz/Quiz";
 import Main from "./components/Dashboard/Main/Main";
+import Signup from "./components/Auth/Signup";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
         <Route path="/resource" element={<Resource />} />
         <Route path="/Chat" element={<Chat />} />
         <Route path="/Quiz" element={<Quiz />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/reset-pass" element={<Signup />} />
       </Routes>
     </div>
   );
