@@ -11,25 +11,21 @@ import Login from "./components/Auth/Login";
 import Quiz from "./components/Quiz/Quiz";
 import Main from "./components/Dashboard/Main/Main";
 
-
 function App() {
- 
   return (
     <div className="App">
       <Navbar />
       <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path="/main" element={<Main />} />
-          <Route path="/student" element={<Student />} />
-          <Route path="/teacher" element={<Teacher />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/resource" element={<Resource />} />
-          <Route path="/Chat" element={<Chat />} />
-          <Route path="/Quiz" element={<Quiz />} />
-
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/main" element={<Main />} />
+        <Route path="/student" element={<Student />} />
+        <Route path="/teacher" element={<Teacher />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/resource" element={<Resource />} />
+        <Route path="/Chat" element={<Chat />} />
+        <Route path="/Quiz" element={<Quiz />} />
       </Routes>
-      
     </div>
   );
 }
