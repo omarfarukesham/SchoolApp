@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Avatar from '../../asset/ChatPageIcon/Avatar.jpg'
 const chat = () => {
     return (
@@ -181,7 +182,7 @@ const chat = () => {
               </div>
         </div>
       </div>
-        </div>
+      </div>
     );
 };
 
