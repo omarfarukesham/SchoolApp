@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const Login = () => {
-    return (
-        <>
-            <div className='flex h-screen justify-center items-center'>
-                <div className="card w-96 bg-base-100 shadow-xl">
-                    {/* <div className="card-body">
+  return (
+    <>
+      <div className="flex h-screen justify-center items-center">
+        <div className="card w-96 bg-base-100 shadow-xl">
+          {/* <div className="card-body">
                         <h2 className="text-center text-2xl font-bold">Login</h2>
                         <small>Super Admin - abc@gmail.com <br></br> Password - abc123</small>
                         <form onSubmit={handleSubmit(onSubmit)}>
@@ -69,12 +69,11 @@ const Login = () => {
                             className="btn btn-outline"
                         ><img class="w-10 rounded-full p-2" src={googleImg} alt="gImages" /> Continue with Google</button>
                     </div> */}
-                        Login
-
-                </div>
-            </div >
-        </>
-    );
+          Login
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Login;
