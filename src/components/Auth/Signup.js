@@ -1,26 +1,16 @@
 import React from "react";
-import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-
-const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = () => {
-    console.log("login");
-  };
+import Head from "../../asset/AuthImg/man-in-suit-and-tie.png";
+const Signup = () => {
   return (
-    <div className="bg-[url('/src/asset/AuthImg/loginImg1.jpg')] bg-cover bg-no-repeat bg-center">
+    <div className="bg-[url('/src/asset/AuthImg/signupImg1.jpg')] h-screen bg-cover bg-no-repeat bg-center">
       <div className="flex justify-end h-screen ">
         <div className="flex flex-col w-full">
           <div className="flex flex-col justify-center px-8 pt-8 my-auto md:justify-start md:pt-0 md:px-24 lg:px-32">
             <div className="flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-lg shadow-xl sm:px-6 md:px-8 lg:px-10">
               <p className="text-3xl text-center mb-2">Welcome.</p>
               <div className="self-center mb-8 text-xl font-light text-gray-600 sm:text-2xl ">
-                Login To Your Account
+                Create Your New Account
               </div>
               <div className="flex gap-4 item-center">
                 {/* Google button */}
@@ -49,9 +39,22 @@ const Login = () => {
                 </label>
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
               </div>
-              {/* form start */}
               <div className="mt-8">
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form>
+                  <div className="flex flex-col mb-2">
+                    <div className="flex relative ">
+                      <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
+                        <img src={Head} alt="" />
+                      </span>
+                      <input
+                        type="text"
+                        id="fullname"
+                        className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                        placeholder="Your Full Name"
+                        required
+                      />
+                    </div>
+                  </div>
                   <div className="flex flex-col mb-2">
                     <div className="flex relative ">
                       <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
@@ -68,29 +71,12 @@ const Login = () => {
                       <input
                         type="text"
                         id="email"
-                        {...register("email", {
-                          required: {
-                            value: true,
-                            message: "Email is Required",
-                          },
-                          pattern: {
-                            value:
-                              /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                            message: "Provide a valid Email",
-                          },
-                        })}
                         className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                         placeholder="Your email"
-                        // required
+                        required
                       />
                     </div>
-                    {errors.email && (
-                      <span className="text-red-500">
-                        {errors.email.message}
-                      </span>
-                    )}
                   </div>
-                  {/* Password */}
                   <div className="flex flex-col mb-6">
                     <div className="flex relative ">
                       <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
@@ -107,26 +93,10 @@ const Login = () => {
                       <input
                         type="password"
                         id="pass"
-                        {...register("password", { required: true })}
                         className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                         placeholder="Your password"
-                        // required
+                        required
                       />
-                    </div>
-                    {errors.email && (
-                      <span className="text-red-500 text-center">
-                        Please enter password
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex items-center mb-6 -mt-4">
-                    <div className="flex ml-auto">
-                      <Link
-                        to="/reset-pass"
-                        className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                      >
-                        Forgot Password?
-                      </Link>
                     </div>
                   </div>
 
@@ -135,7 +105,7 @@ const Login = () => {
                       type="submit"
                       className="py-2 mt-4 px-4  bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                     >
-                      Log in
+                      Sign Up
                     </button>
                   </div>
                 </form>
@@ -144,9 +114,9 @@ const Login = () => {
                 <div className="pt-2 sm:pb-3 md:pb-12 text-center">
                   <Link
                     className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                    to="/signup"
+                    to="/login"
                   >
-                    <p>Don&#x27;t have an account? Sign up here.</p>
+                    <p>Already have an account? Log in here.</p>
                   </Link>
                 </div>
               </div>
@@ -158,4 +128,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
