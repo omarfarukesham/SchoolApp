@@ -1,7 +1,17 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = () => {
+    console.log("login");
+  };
   return (
     <div className="bg-[url('/src/asset/LoginImg/loginImg1.jpg')] h-screen bg-cover bg-no-repeat bg-center">
       <div className="flex flex-wrap h-screen ">
@@ -39,8 +49,9 @@ const Login = () => {
                 </label>
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
               </div>
+              {/* form start */}
               <div className="mt-8">
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex flex-col mb-2">
                     <div className="flex relative ">
                       <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
@@ -57,12 +68,29 @@ const Login = () => {
                       <input
                         type="text"
                         id="email"
+                        {...register("email", {
+                          required: {
+                            value: true,
+                            message: "Email is Required",
+                          },
+                          pattern: {
+                            value:
+                              /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                            message: "Provide a valid Email",
+                          },
+                        })}
                         className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                         placeholder="Your email"
-                        required
+                        // required
                       />
                     </div>
+                    {errors.email && (
+                      <span className="text-red-500">
+                        {errors.email.message}
+                      </span>
+                    )}
                   </div>
+                  {/* Password */}
                   <div className="flex flex-col mb-6">
                     <div className="flex relative ">
                       <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
@@ -79,11 +107,17 @@ const Login = () => {
                       <input
                         type="password"
                         id="pass"
+                        {...register("password", { required: true })}
                         className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                         placeholder="Your password"
-                        required
+                        // required
                       />
                     </div>
+                    {errors.email && (
+                      <span className="text-red-500 text-center">
+                        Please enter password
+                      </span>
+                    )}
                   </div>
                   <div className="flex items-center mb-6 -mt-4">
                     <div className="flex ml-auto">
