@@ -3,6 +3,11 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  //REGEX pattern
+  const EMAIL_PATTERN = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-z]+)$/;
+  // Min length 8 and at least 1 latter
+  const PASSWORD_PATTERN = /^(?=.*\d).{8,}$/;
+
   const {
     register,
     handleSubmit,
@@ -53,7 +58,7 @@ const Login = () => {
               <div className="mt-8">
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex flex-col mb-2">
-                    <div className="flex relative ">
+                    <div className="flex relative">
                       <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
                         <svg
                           width="15"
@@ -74,8 +79,7 @@ const Login = () => {
                             message: "Email is Required",
                           },
                           pattern: {
-                            value:
-                              /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                            value: EMAIL_PATTERN,
                             message: "Provide a valid Email",
                           },
                         })}
@@ -85,7 +89,7 @@ const Login = () => {
                       />
                     </div>
                     {errors.email && (
-                      <span className="text-red-500">
+                      <span className="text-sm text-red-500 ml-10 mt-2">
                         {errors.email.message}
                       </span>
                     )}
@@ -107,17 +111,29 @@ const Login = () => {
                       <input
                         type="password"
                         id="pass"
-                        {...register("password", { required: true })}
-                        className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                        {...register("password", {
+                          required: {
+                            value: true,
+                            message: "Password is Required",
+                          },
+                          pattern: {
+                            value: PASSWORD_PATTERN,
+                            message: "Provide a valid password",
+                          },
+                        })}
+                        className="rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                         placeholder="Your password"
                         // required
                       />
                     </div>
-                    {errors.email && (
-                      <span className="text-red-500 text-center">
-                        Please enter password
+                    {errors.password && (
+                      <span className="text-sm text-red-500 pl-10 pt-2 ">
+                        {errors.password.message}
                       </span>
                     )}
+                    <span className="text-sm text-gray-500 mt-2 ml-10">
+                      Give Minimum 8 characters and at least 1 latter
+                    </span>
                   </div>
                   <div className="flex items-center mb-6 -mt-4">
                     <div className="flex ml-auto">
