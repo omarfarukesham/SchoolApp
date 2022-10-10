@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 // import { useAuthState } from "react-firebase-hooks/auth";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
@@ -11,8 +11,9 @@ const Login = () => {
   // Min length 8 and at least 1 latter
   const PASSWORD_PATTERN = /^(?=.*\d).{8,}$/;
 
-  const navigate = useNavigation();
+  const navigate = useNavigate();
   const location = useLocation();
+
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
   googleError && console.log("error", googleError.code);
@@ -24,11 +25,10 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = () => {
-    googleError && console.log("login");
+    // googleError && console.log("login");
   };
 
   let from = location.state?.from?.pathname || "/";
-
   if (googleUser) {
     navigate(from, { replace: true });
   }
