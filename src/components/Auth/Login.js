@@ -2,8 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
-// import { useAuthState } from "react-firebase-hooks/auth";
-import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import {
+  useAuthState,
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import Loading from "../Shared/Loading";
 const Login = () => {
   //REGEX pattern
@@ -13,9 +16,14 @@ const Login = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const [user, loading, error] = useAuthState(auth);
 
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
+
+  const [signInWithEmailAndPassword, emailUser, emailLoading, emailError] =
+    useSignInWithEmailAndPassword(auth);
+
   googleError && console.log("error", googleError.code);
   const {
     register,
@@ -24,10 +32,10 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = () => {
-    // googleError && console.log("login");
+  const onSubmit = ({ email, password }) => {
+    signInWithEmailAndPassword(email, password);
   };
-
+  emailError && console.log("Email error", emailError.customData.email);
   let from = location.state?.from?.pathname || "/";
   if (googleUser) {
     navigate(from, { replace: true });
@@ -178,6 +186,11 @@ const Login = () => {
                       Log in
                     </button>
                   </div>
+                  {emailError && (
+                    <span className="text-sm text-red-500 ml-10 mt-2">
+                      {emailError.message}
+                    </span>
+                  )}
                 </form>
               </div>
               <div className="flex items-center justify-center mt-6">
