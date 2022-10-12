@@ -1,9 +1,12 @@
 import React from 'react';
+import EResources from './EResources';
+import EResourcesHeader from './EResourcesHeader';
 
 const Resource = () => {
     return (
         <div>
-            Resources ..............
+            <EResourcesHeader/>
+            <EResources/>
         </div>
     );
 };
