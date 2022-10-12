@@ -1,7 +1,45 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
+import { useForm } from "react-hook-form";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import auth from "../../firebase.init";
+import {
+  useAuthState,
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
+import Loading from "../Shared/Loading";
 const Login = () => {
+  //REGEX pattern
+  const EMAIL_PATTERN = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-z]+)$/;
+  // Min length 8 and at least 1 latter
+  const PASSWORD_PATTERN = /^(?=.*\d).{8,}$/;
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [user, loading, error] = useAuthState(auth);
+
+  const [signInWithGoogle, googleUser, googleLoading, googleError] =
+    useSignInWithGoogle(auth);
+
+  const [signInWithEmailAndPassword, emailUser, emailLoading, emailError] =
+    useSignInWithEmailAndPassword(auth);
+
+  googleError && console.log("error", googleError.code);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = ({ email, password }) => {
+    signInWithEmailAndPassword(email, password);
+  };
+  emailError && console.log("Email error", emailError.customData.email);
+  let from = location.state?.from?.pathname || "/";
+  if (googleUser) {
+    navigate(from, { replace: true });
+  }
   return (
     <div className="bg-[url('/src/asset/AuthImg/loginImg1.jpg')] bg-cover bg-no-repeat bg-center">
       <div className="flex justify-end h-screen ">
@@ -15,23 +53,32 @@ const Login = () => {
               <div className="flex gap-4 item-center">
                 {/* Google button */}
                 <button
+                  onClick={() => signInWithGoogle()}
                   type="button"
                   className="py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                 >
-                  <svg
-                    width="20"
-                    height="20"
-                    fill="currentColor"
-                    className="mr-2"
-                    viewBox="0 0 1792 1792"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M896 786h725q12 67 12 128 0 217-91 387.5t-259.5 266.5-386.5 96q-157 0-299-60.5t-245-163.5-163.5-245-60.5-299 60.5-299 163.5-245 245-163.5 299-60.5q300 0 515 201l-209 201q-123-119-306-119-129 0-238.5 65t-173.5 176.5-64 243.5 64 243.5 173.5 176.5 238.5 65q87 0 160-24t120-60 82-82 51.5-87 22.5-78h-436v-264z"></path>
-                  </svg>
+                  {googleLoading ? (
+                    <Loading size={18} className={"mr-2"} />
+                  ) : (
+                    <svg
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      className="mr-2"
+                      viewBox="0 0 1792 1792"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M896 786h725q12 67 12 128 0 217-91 387.5t-259.5 266.5-386.5 96q-157 0-299-60.5t-245-163.5-163.5-245-60.5-299 60.5-299 163.5-245 245-163.5 299-60.5q300 0 515 201l-209 201q-123-119-306-119-129 0-238.5 65t-173.5 176.5-64 243.5 64 243.5 173.5 176.5 238.5 65q87 0 160-24t120-60 82-82 51.5-87 22.5-78h-436v-264z"></path>
+                    </svg>
+                  )}
                   Google
                 </button>
               </div>
-
+              {googleError && (
+                <span className="text-sm text-red-500 ml-10 mt-2">
+                  {googleError.code}
+                </span>
+              )}
               <div className="flex mt-7 items-center text-center">
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
                 <label className="block font-medium text-sm text-gray-600 w-full">
@@ -39,10 +86,11 @@ const Login = () => {
                 </label>
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
               </div>
+              {/* form start */}
               <div className="mt-8">
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex flex-col mb-2">
-                    <div className="flex relative ">
+                    <div className="flex relative">
                       <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
                         <svg
                           width="15"
@@ -57,12 +105,28 @@ const Login = () => {
                       <input
                         type="text"
                         id="email"
+                        {...register("email", {
+                          required: {
+                            value: true,
+                            message: "Email is Required",
+                          },
+                          pattern: {
+                            value: EMAIL_PATTERN,
+                            message: "Provide a valid Email",
+                          },
+                        })}
                         className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                         placeholder="Your email"
-                        required
+                        // required
                       />
                     </div>
+                    {errors.email && (
+                      <span className="text-sm text-red-500 ml-10 mt-2">
+                        {errors.email.message}
+                      </span>
+                    )}
                   </div>
+                  {/* Password */}
                   <div className="flex flex-col mb-6">
                     <div className="flex relative ">
                       <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
@@ -79,11 +143,29 @@ const Login = () => {
                       <input
                         type="password"
                         id="pass"
-                        className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                        {...register("password", {
+                          required: {
+                            value: true,
+                            message: "Password is Required",
+                          },
+                          pattern: {
+                            value: PASSWORD_PATTERN,
+                            message: "Provide a valid password",
+                          },
+                        })}
+                        className="rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                         placeholder="Your password"
-                        required
+                        // required
                       />
                     </div>
+                    {errors.password && (
+                      <span className="text-sm text-red-500 pl-10 pt-2 ">
+                        {errors.password.message}
+                      </span>
+                    )}
+                    <span className="text-sm text-gray-500 mt-2 ml-10">
+                      Give Minimum 8 characters and at least 1 latter
+                    </span>
                   </div>
                   <div className="flex items-center mb-6 -mt-4">
                     <div className="flex ml-auto">
@@ -104,6 +186,11 @@ const Login = () => {
                       Log in
                     </button>
                   </div>
+                  {emailError && (
+                    <span className="text-sm text-red-500 ml-10 mt-2">
+                      {emailError.message}
+                    </span>
+                  )}
                 </form>
               </div>
               <div className="flex items-center justify-center mt-6">
