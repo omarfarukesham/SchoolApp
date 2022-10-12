@@ -16,10 +16,10 @@ const EResources = () => {
         setFilter(updateList)
      }
     return (
-        <div className="bg-slate-900 bg-cover bg-no-repeat text-center font-poppins">
-        <div class=" -translate-y-2/4  rounded-lg mx-auto w-1/2 py-6 bg-[#43d485] ">
+        <div className="bg-slate-900 pt-5 md:pt-0 bg-cover bg-no-repeat text-center font-poppins">
+        <div class=" md:-translate-y-2/4  rounded-lg mx-auto w-1/2 py-8 bg-[#43d485] ">
      
-        <div className="block md:flex items-center justify-center">
+        <div className="block md:flex  items-center justify-center">
        
         <div className="flex items-center mb-4 md:mb-0">
         <BsBook className="text-3xl mx-6 text-[#FCF6F5FF]"/>
