@@ -1,0 +1,21 @@
+[
+    {
+        "id":1,
+        "name":"Bangla",
+        "Class":"V",
+        "image":"./Amar-Bangla-Boi-Class-5.jpg"
+    },
+    
+    {
+        "id":2,
+        "name":"English",
+        "Class":"V",
+        "image":"./Amar-Bangla-Boi-Class-5.jpg"
+    },
+    {
+        "id":3,
+        "name":"ICT",
+        "Class":"V",
+        "image":"./Amar-Bangla-Boi-Class-5.jpg"
+    }
+]
