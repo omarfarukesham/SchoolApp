@@ -58,7 +58,7 @@ const Login = () => {
                   className="py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                 >
                   {googleLoading ? (
-                    <Loading size={18} className={"mr-2"} />
+                    <Loading size={22} className={"mr-2"} />
                   ) : (
                     <svg
                       width="20"
@@ -86,7 +86,7 @@ const Login = () => {
                 </label>
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
               </div>
-              {/* form start */}
+              {/* Form to login with email and password */}
               <div className="mt-8">
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex flex-col mb-2">
@@ -181,14 +181,15 @@ const Login = () => {
                   <div className="flex w-full">
                     <button
                       type="submit"
-                      className="py-2 mt-4 px-4  bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+                      className=" flex justify-center py-2 mt-4 px-4  bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                     >
+                      {emailLoading && <Loading size={22} className="pr-2" />}{" "}
                       Log in
                     </button>
                   </div>
                   {emailError && (
                     <span className="text-sm text-red-500 ml-10 mt-2">
-                      {emailError.message}
+                      {emailError.code}
                     </span>
                   )}
                 </form>
