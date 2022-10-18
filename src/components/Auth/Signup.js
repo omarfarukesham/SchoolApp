@@ -41,6 +41,7 @@ const Signup = () => {
                   Google
                 </button>
               </div>
+              {/* This will show google login error */}
               <p className="mt-3 text-error text-center">{googleError.code}</p>
 
               <div className="flex mt-7 items-center text-center">
@@ -50,6 +51,8 @@ const Signup = () => {
                 </label>
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
               </div>
+
+              {/* Form to Create user with email and password */}
               <div className="mt-8">
                 <form>
                   <div className="flex flex-col mb-2">
