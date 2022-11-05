@@ -4,24 +4,37 @@ import Head from "../../asset/AuthImg/man-in-suit-and-tie.png";
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading";
 import { useForm } from "react-hook-form";
+
 const Signup = () => {
   const EMAIL_PATTERN = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-z]+)$/;
   const PASSWORD_PATTERN = /^(?=.*\d).{8,}$/;
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
+
   const [createUserWithEmailAndPassword, emailUser, emailLoading, emailError] =
     useCreateUserWithEmailAndPassword(auth);
+
+  const [updateProfile, updating, error] = useUpdateProfile(auth);
+
+  const onSubmit = ({ email, password, fullName }, data) => {
+    createUserWithEmailAndPassword(email, password);
+    updateProfile({ fullName });
+    console.log(data);
+  };
+
   return (
     <div className="bg-[url('/src/asset/AuthImg/signupImg1.jpg')] h-screen bg-cover bg-no-repeat bg-center">
       <div className="flex justify-end h-screen ">
@@ -161,11 +174,17 @@ const Signup = () => {
                   <div className="flex w-full">
                     <button
                       type="submit"
-                      className="py-2 mt-4 px-4  bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+                      className="py-2 mt-4 px-4 flex justify-center items-center bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                     >
+                      {emailLoading && <Loading size={18} className={"pr-2"} />}
                       Sign Up
                     </button>
                   </div>
+                  {emailError && (
+                    <p className="text-red-500 text-sm pb-1 flex justify-center mt-1">
+                      {emailError?.code}
+                    </p>
+                  )}
                 </form>
               </div>
               <div className="flex items-center justify-center mt-6">
