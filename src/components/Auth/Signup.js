@@ -31,17 +31,14 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
-  const onSubmit = ({ email, password, fullName }, data) => {
+  const onSubmit = ({ email, password, fullName }) => {
     createUserWithEmailAndPassword(email, password);
     updateProfile({ fullName });
-    // console.log(data);
-    if (emailError === undefined) {
-      toast.success("Account toasted successfully");
-    }
-    if (googleUser || emailUser) {
-      navigate("/");
-    }
   };
+  if (googleUser || emailUser) {
+    navigate("/");
+    toast.success("Account Created successfully");
+  }
 
   return (
     <div className="bg-[url('/src/asset/AuthImg/signupImg1.jpg')] h-screen bg-cover bg-no-repeat bg-center">
@@ -178,6 +175,9 @@ const Signup = () => {
                       {errors.password?.message}
                     </p>
                   )}
+                  <span className="text-sm text-gray-500 mt-2 ml-10">
+                    Give Minimum 8 characters and at least 1 latter
+                  </span>
 
                   <div className="flex w-full">
                     <button
