@@ -8,6 +8,7 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import Loading from "../Shared/Loading";
+import toast from "react-hot-toast";
 const Login = () => {
   //REGEX pattern
   const EMAIL_PATTERN = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-z]+)$/;
@@ -16,7 +17,7 @@ const Login = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
@@ -28,7 +29,6 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -37,8 +37,9 @@ const Login = () => {
   };
   emailError && console.log("Email error", emailError.customData.email);
   let from = location.state?.from?.pathname || "/";
-  if (googleUser) {
+  if (googleUser || emailUser || user) {
     navigate(from, { replace: true });
+    toast.success("Login Successfully");
   }
   return (
     <div className="bg-[url('/src/asset/AuthImg/loginImg1.jpg')] bg-cover bg-no-repeat bg-center">
@@ -58,7 +59,7 @@ const Login = () => {
                   className="py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                 >
                   {googleLoading ? (
-                    <Loading size={18} className={"mr-2"} />
+                    <Loading size={22} className={"mr-2"} />
                   ) : (
                     <svg
                       width="20"
@@ -86,7 +87,7 @@ const Login = () => {
                 </label>
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
               </div>
-              {/* form start */}
+              {/* Form to login with email and password */}
               <div className="mt-8">
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex flex-col mb-2">
@@ -102,6 +103,7 @@ const Login = () => {
                           <path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"></path>
                         </svg>
                       </span>
+
                       <input
                         type="text"
                         id="email"
@@ -181,14 +183,15 @@ const Login = () => {
                   <div className="flex w-full">
                     <button
                       type="submit"
-                      className="py-2 mt-4 px-4  bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+                      className=" flex justify-center py-2 mt-4 px-4  bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                     >
+                      {emailLoading && <Loading size={22} className="pr-2" />}
                       Log in
                     </button>
                   </div>
                   {emailError && (
                     <span className="text-sm text-red-500 ml-10 mt-2">
-                      {emailError.message}
+                      {emailError.code}
                     </span>
                   )}
                 </form>
