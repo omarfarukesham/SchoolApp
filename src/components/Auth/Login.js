@@ -8,6 +8,7 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import Loading from "../Shared/Loading";
+import toast from "react-hot-toast";
 const Login = () => {
   //REGEX pattern
   const EMAIL_PATTERN = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-z]+)$/;
@@ -16,7 +17,7 @@ const Login = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
@@ -28,7 +29,6 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -37,8 +37,9 @@ const Login = () => {
   };
   emailError && console.log("Email error", emailError.customData.email);
   let from = location.state?.from?.pathname || "/";
-  if (googleUser || emailUser) {
+  if (googleUser || emailUser || user) {
     navigate(from, { replace: true });
+    toast.success("Login Successfully");
   }
   return (
     <div className="bg-[url('/src/asset/AuthImg/loginImg1.jpg')] bg-cover bg-no-repeat bg-center">
