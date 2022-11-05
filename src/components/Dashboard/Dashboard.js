@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink as NavLink } from "react-router-dom";
 
 const Dashboard = () => {
   return (
@@ -21,11 +22,17 @@ const Dashboard = () => {
             {/* <!-- Sidebar content here --> */}
 
             <li>
-              <a>Sidebar Item 2</a>
+              <NavLink>Dashboard</NavLink>
             </li>
 
             <li>
-              <a>Sidebar Item 2</a>
+              <NavLink>Grades</NavLink>
+            </li>
+            <li>
+              <NavLink>Student Ledger</NavLink>
+            </li>
+            <li>
+              <NavLink>Online Payment</NavLink>
             </li>
           </ul>
         </div>
