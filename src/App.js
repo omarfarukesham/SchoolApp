@@ -12,10 +12,12 @@ import Quiz from "./components/Quiz/Quiz";
 import Main from "./components/Dashboard/Main/Main";
 import Signup from "./components/Auth/Signup";
 import ResetPass from "./components/Auth/ResetPass";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <div className="App">
+      <Toaster />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
