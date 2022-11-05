@@ -1,12 +1,48 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Head from "../../asset/AuthImg/man-in-suit-and-tie.png";
-import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+
 const Signup = () => {
+  const EMAIL_PATTERN = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-z]+)$/;
+  const PASSWORD_PATTERN = /^(?=.*\d).{8,}$/;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
+
+  const [createUserWithEmailAndPassword, emailUser, emailLoading, emailError] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  const [updateProfile] = useUpdateProfile(auth);
+
+  const navigate = useNavigate();
+
+  const onSubmit = ({ email, password, fullName }, data) => {
+    createUserWithEmailAndPassword(email, password);
+    updateProfile({ fullName });
+    // console.log(data);
+    if (emailError === undefined) {
+      toast.success("Account toasted successfully");
+    }
+    if (googleUser || emailUser) {
+      navigate("/");
+    }
+  };
+
   return (
     <div className="bg-[url('/src/asset/AuthImg/signupImg1.jpg')] h-screen bg-cover bg-no-repeat bg-center">
       <div className="flex justify-end h-screen ">
@@ -25,7 +61,7 @@ const Signup = () => {
                   className="py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                 >
                   {googleLoading ? (
-                    <Loading size={22} />
+                    <Loading className="pr-2" size={22} />
                   ) : (
                     <svg
                       width="20"
@@ -41,6 +77,8 @@ const Signup = () => {
                   Google
                 </button>
               </div>
+              {/* This will show google login error */}
+              <p className="mt-3 text-error text-center">{googleError?.code}</p>
 
               <div className="flex mt-7 items-center text-center">
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
@@ -49,8 +87,10 @@ const Signup = () => {
                 </label>
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
               </div>
+
+              {/* Form to Create user with email and password */}
               <div className="mt-8">
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex flex-col mb-2">
                     <div className="flex relative ">
                       <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
@@ -61,10 +101,17 @@ const Signup = () => {
                         id="fullname"
                         className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                         placeholder="Your Full Name"
-                        required
+                        {...register("fullName", {
+                          required: "Enter your name",
+                        })}
                       />
                     </div>
                   </div>
+                  {errors.fullName && (
+                    <p className="text-red-500 text-sm mb-2 -mt-1">
+                      {errors.fullName?.message}
+                    </p>
+                  )}
                   <div className="flex flex-col mb-2">
                     <div className="flex relative ">
                       <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
@@ -80,14 +127,25 @@ const Signup = () => {
                       </span>
                       <input
                         type="text"
-                        id="email"
+                        // id="email"
                         className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                        {...register("email", {
+                          required: "Enter your email",
+                          pattern: {
+                            value: EMAIL_PATTERN,
+                            message: "Enter valid email",
+                          },
+                        })}
                         placeholder="Your email"
-                        required
                       />
                     </div>
                   </div>
-                  <div className="flex flex-col mb-6">
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mb-2 -mt-1">
+                      {errors.email?.message}
+                    </p>
+                  )}
+                  <div className="flex flex-col mb-2">
                     <div className="flex relative ">
                       <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
                         <svg
@@ -102,22 +160,39 @@ const Signup = () => {
                       </span>
                       <input
                         type="password"
-                        id="pass"
+                        // id="pass"
                         className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                         placeholder="Your password"
-                        required
+                        {...register("password", {
+                          required: "Enter your password",
+                          pattern: {
+                            value: PASSWORD_PATTERN,
+                            message: "Min length 8 and at least 1 latter",
+                          },
+                        })}
                       />
                     </div>
                   </div>
+                  {errors.password && (
+                    <p className="text-red-500 text-sm pb-1">
+                      {errors.password?.message}
+                    </p>
+                  )}
 
                   <div className="flex w-full">
                     <button
                       type="submit"
-                      className="py-2 mt-4 px-4  bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+                      className="py-2 mt-4 px-4 flex justify-center items-center bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                     >
+                      {emailLoading && <Loading size={18} className={"pr-2"} />}
                       Sign Up
                     </button>
                   </div>
+                  {emailError && (
+                    <p className="text-red-500 text-sm pb-1 flex justify-center mt-1">
+                      {emailError?.code}
+                    </p>
+                  )}
                 </form>
               </div>
               <div className="flex items-center justify-center mt-6">
