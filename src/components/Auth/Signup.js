@@ -32,7 +32,7 @@ const Signup = () => {
   const onSubmit = ({ email, password, fullName }, data) => {
     createUserWithEmailAndPassword(email, password);
     updateProfile({ fullName });
-    console.log(data);
+    // console.log(data);
   };
 
   return (
