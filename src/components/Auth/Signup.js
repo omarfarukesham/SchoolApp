@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Head from "../../asset/AuthImg/man-in-suit-and-tie.png";
 import {
   useCreateUserWithEmailAndPassword,
@@ -9,6 +9,7 @@ import {
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const EMAIL_PATTERN = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-z]+)$/;
@@ -17,7 +18,6 @@ const Signup = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -27,12 +27,20 @@ const Signup = () => {
   const [createUserWithEmailAndPassword, emailUser, emailLoading, emailError] =
     useCreateUserWithEmailAndPassword(auth);
 
-  const [updateProfile, updating, error] = useUpdateProfile(auth);
+  const [updateProfile] = useUpdateProfile(auth);
+
+  const navigate = useNavigate();
 
   const onSubmit = ({ email, password, fullName }, data) => {
     createUserWithEmailAndPassword(email, password);
     updateProfile({ fullName });
     // console.log(data);
+    if (emailError === undefined) {
+      toast.success("Account toasted successfully");
+    }
+    if (googleUser || emailUser) {
+      navigate("/");
+    }
   };
 
   return (
