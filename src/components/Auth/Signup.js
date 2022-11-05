@@ -1,63 +1,64 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import auth from "../../firebase.init";
+import { Link, useNavigate } from "react-router-dom";
+import Head from "../../asset/AuthImg/man-in-suit-and-tie.png";
 import {
-  useAuthState,
-  useSignInWithEmailAndPassword,
+  useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 import Loading from "../Shared/Loading";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-const Login = () => {
-  //REGEX pattern
+
+const Signup = () => {
   const EMAIL_PATTERN = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-z]+)$/;
+  const PASSWORD_PATTERN = /^(?=.*\d).{8,}$/;
 
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [user] = useAuthState(auth);
-
-  const [signInWithGoogle, googleUser, googleLoading, googleError] =
-    useSignInWithGoogle(auth);
-
-  const [signInWithEmailAndPassword, emailUser, emailLoading, emailError] =
-    useSignInWithEmailAndPassword(auth);
-
-  googleError && console.log("error", googleError.code);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = ({ email, password }) => {
-    signInWithEmailAndPassword(email, password);
+  const [signInWithGoogle, googleUser, googleLoading, googleError] =
+    useSignInWithGoogle(auth);
+
+  const [createUserWithEmailAndPassword, emailUser, emailLoading, emailError] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  const [updateProfile] = useUpdateProfile(auth);
+
+  const navigate = useNavigate();
+
+  const onSubmit = ({ email, password, fullName }) => {
+    createUserWithEmailAndPassword(email, password);
+    updateProfile({ fullName });
   };
-  emailError && console.log("Email error", emailError.customData.email);
-  let from = location.state?.from?.pathname || "/";
-  if (googleUser || emailUser || user) {
-    navigate(from, { replace: true });
-    toast.success("Login Successfully");
+  if (googleUser || emailUser) {
+    navigate("/");
+    toast.success("Account Created successfully");
   }
+
   return (
-    <div className="bg-[url('/src/asset/AuthImg/loginImg1.jpg')] bg-cover bg-no-repeat bg-center">
+    <div className="bg-[url('/src/asset/AuthImg/signupImg1.jpg')] h-screen bg-cover bg-no-repeat bg-center">
       <div className="flex justify-end h-screen ">
         <div className="flex flex-col w-full">
           <div className="flex flex-col justify-center px-8 pt-8 my-auto md:justify-start md:pt-0 md:px-24 lg:px-32">
             <div className="flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-lg shadow-xl sm:px-6 md:px-8 lg:px-10">
               <p className="text-3xl text-center mb-2">Welcome.</p>
               <div className="self-center mb-8 text-xl font-light text-gray-600 sm:text-2xl ">
-                Login To Your Account
+                Create Your New Account
               </div>
               <div className="flex gap-4 item-center">
                 {/* Google button */}
                 <button
-                  onClick={() => signInWithGoogle()}
                   type="button"
+                  onClick={() => signInWithGoogle()}
                   className="py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                 >
                   {googleLoading ? (
-                    <Loading size={22} className={"mr-2"} />
+                    <Loading className="pr-2" size={22} />
                   ) : (
                     <svg
                       width="20"
@@ -73,11 +74,9 @@ const Login = () => {
                   Google
                 </button>
               </div>
-              {googleError && (
-                <span className="text-sm text-red-500 ml-10 mt-2">
-                  {googleError.code}
-                </span>
-              )}
+              {/* This will show google login error */}
+              <p className="mt-3 text-error text-center">{googleError?.code}</p>
+
               <div className="flex mt-7 items-center text-center">
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
                 <label className="block font-medium text-sm text-gray-600 w-full">
@@ -85,11 +84,33 @@ const Login = () => {
                 </label>
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
               </div>
-              {/* Form to login with email and password */}
+
+              {/* Form to Create user with email and password */}
               <div className="mt-8">
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex flex-col mb-2">
-                    <div className="flex relative">
+                    <div className="flex relative ">
+                      <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
+                        <img src={Head} alt="" />
+                      </span>
+                      <input
+                        type="text"
+                        id="fullname"
+                        className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                        placeholder="Your Full Name"
+                        {...register("fullName", {
+                          required: "Enter your name",
+                        })}
+                      />
+                    </div>
+                  </div>
+                  {errors.fullName && (
+                    <p className="text-red-500 text-sm mb-2 -mt-1">
+                      {errors.fullName?.message}
+                    </p>
+                  )}
+                  <div className="flex flex-col mb-2">
+                    <div className="flex relative ">
                       <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
                         <svg
                           width="15"
@@ -101,33 +122,27 @@ const Login = () => {
                           <path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"></path>
                         </svg>
                       </span>
-
                       <input
                         type="text"
-                        id="email"
+                        // id="email"
+                        className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                         {...register("email", {
-                          required: {
-                            value: true,
-                            message: "Email is Required",
-                          },
+                          required: "Enter your email",
                           pattern: {
                             value: EMAIL_PATTERN,
-                            message: "Provide a valid Email",
+                            message: "Enter valid email",
                           },
                         })}
-                        className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                         placeholder="Your email"
-                        // required
                       />
                     </div>
-                    {errors.email && (
-                      <span className="text-sm text-red-500 ml-10 mt-2">
-                        {errors.email.message}
-                      </span>
-                    )}
                   </div>
-                  {/* Password */}
-                  <div className="flex flex-col mb-6">
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mb-2 -mt-1">
+                      {errors.email?.message}
+                    </p>
+                  )}
+                  <div className="flex flex-col mb-2">
                     <div className="flex relative ">
                       <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
                         <svg
@@ -142,48 +157,41 @@ const Login = () => {
                       </span>
                       <input
                         type="password"
-                        id="pass"
+                        // id="pass"
+                        className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                        placeholder="Your password"
                         {...register("password", {
-                          required: {
-                            value: true,
-                            message: "Password is Required",
+                          required: "Enter your password",
+                          pattern: {
+                            value: PASSWORD_PATTERN,
+                            message: "Min length 8 and at least 1 latter",
                           },
                         })}
-                        className="rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                        placeholder="Your password"
-                        // required
                       />
                     </div>
-                    {errors.password && (
-                      <span className="text-sm text-red-500 pl-10 pt-2 ">
-                        {errors.password.message}
-                      </span>
-                    )}
                   </div>
-                  <div className="flex items-center mb-6 -mt-4">
-                    <div className="flex ml-auto">
-                      <Link
-                        to="/reset-pass"
-                        className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                      >
-                        Forgot Password?
-                      </Link>
-                    </div>
-                  </div>
+                  {errors.password && (
+                    <p className="text-red-500 text-sm pb-1">
+                      {errors.password?.message}
+                    </p>
+                  )}
+                  <span className="text-sm text-gray-500 mt-2 ml-10">
+                    Give Minimum 8 characters and at least 1 latter
+                  </span>
 
                   <div className="flex w-full">
                     <button
                       type="submit"
-                      className=" flex justify-center py-2 mt-4 px-4  bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+                      className="py-2 mt-4 px-4 flex justify-center items-center bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                     >
-                      {emailLoading && <Loading size={22} className="pr-2" />}
-                      Log in
+                      {emailLoading && <Loading size={18} className={"pr-2"} />}
+                      Sign Up
                     </button>
                   </div>
                   {emailError && (
-                    <span className="text-sm text-red-500 ml-10 mt-2">
-                      {emailError.code}
-                    </span>
+                    <p className="text-red-500 text-sm pb-1 flex justify-center mt-1">
+                      {emailError?.code}
+                    </p>
                   )}
                 </form>
               </div>
@@ -191,9 +199,9 @@ const Login = () => {
                 <div className="pt-2 sm:pb-3 md:pb-12 text-center">
                   <Link
                     className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                    to="/signup"
+                    to="/login"
                   >
-                    <p>Don&#x27;t have an account? Sign up here.</p>
+                    <p>Already have an account? Log in here.</p>
                   </Link>
                 </div>
               </div>
@@ -205,4 +213,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
