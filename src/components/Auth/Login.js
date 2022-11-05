@@ -12,8 +12,6 @@ import toast from "react-hot-toast";
 const Login = () => {
   //REGEX pattern
   const EMAIL_PATTERN = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-z]+)$/;
-  // Min length 8 and at least 1 latter
-  const PASSWORD_PATTERN = /^(?=.*\d).{8,}$/;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -150,10 +148,6 @@ const Login = () => {
                             value: true,
                             message: "Password is Required",
                           },
-                          pattern: {
-                            value: PASSWORD_PATTERN,
-                            message: "Provide a valid password",
-                          },
                         })}
                         className="rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                         placeholder="Your password"
@@ -165,9 +159,6 @@ const Login = () => {
                         {errors.password.message}
                       </span>
                     )}
-                    <span className="text-sm text-gray-500 mt-2 ml-10">
-                      Give Minimum 8 characters and at least 1 latter
-                    </span>
                   </div>
                   <div className="flex items-center mb-6 -mt-4">
                     <div className="flex ml-auto">
