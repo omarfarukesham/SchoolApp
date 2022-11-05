@@ -13,6 +13,7 @@ import Main from "./components/Dashboard/Main/Main";
 import Signup from "./components/Auth/Signup";
 import ResetPass from "./components/Auth/ResetPass";
 import { Toaster } from "react-hot-toast";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/main" element={<Main />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/student" element={<Student />} />
         <Route path="/teacher" element={<Teacher />} />
         <Route path="/admin" element={<Admin />} />
