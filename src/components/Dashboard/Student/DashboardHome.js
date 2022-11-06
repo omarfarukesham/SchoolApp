@@ -29,7 +29,7 @@ const DashboardHome = () => {
     },
   ];
   return (
-    <section>
+    <section className="">
       <section className=" pt-7 pb-6 px-3 border shadow-md">
         {/* Alert Section */}
         <div className="flex justify-center mb-5">
@@ -51,8 +51,8 @@ const DashboardHome = () => {
         </div>
       </section>
 
-      <section className="flex mt-9">
-        <section className=" border rounded">
+      <section className=" mt-9 grid grid-cols-3 gap-8 border shadow-md p-5 rounded">
+        <section className=" col-span-1 border rounded">
           {/* Title */}
           <div className="p-5 text-center  bg-blue-400 text-white rounded-t-md">
             <p className="text-xl">Class Teacher </p>
@@ -100,7 +100,48 @@ const DashboardHome = () => {
             </div>
           </section>
         </section>
-        <section>Routine</section>
+        <section className="col-span-2 border">
+          <div className="bg-blue-400 text-center p-5 rounded-t-md">
+            <p className="text-white text-xl">Exam Routine</p>
+          </div>
+          <div className="overflow-x-auto">
+            {/* Demo Data */}
+            <table className="table w-full">
+              {/* <!-- head --> */}
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Subject</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* <!-- row 1 --> */}
+                <tr>
+                  <th>1</th>
+                  <td>Physics</td>
+                  <td>12 Nov 2022</td>
+                  <td>10:00 AM</td>
+                </tr>
+                {/* <!-- row 2 --> */}
+                <tr className="active">
+                  <th>2</th>
+                  <td>Math</td>
+                  <td>14 Nov 2022</td>
+                  <td>12:00 PM</td>
+                </tr>
+                {/* <!-- row 3 --> */}
+                <tr>
+                  <th>3</th>
+                  <td>Bangla</td>
+                  <td>15 Nov 2022</td>
+                  <td>11:00 AM</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
       </section>
     </section>
   );
