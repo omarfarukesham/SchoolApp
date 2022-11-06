@@ -1,8 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-// import DashboardHome from "./DashboardHome";
 const Student = ({ children }) => {
-  console.log(children);
   return (
     <div>
       <div className="drawer drawer-mobile">
@@ -20,7 +18,21 @@ const Student = ({ children }) => {
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 bg-black bg-opacity-90 text-white">
-            {/* <!-- Sidebar content here --> */}
+            {/*  Sidebar content here  */}
+            {/* Student Profile */}
+            <section className="flex flex-col items-center">
+              <p className="text-lg text-white text-center">Ananta Jalil</p>
+              <p className="text-sm text-gray-400 mt-1">2022091701022</p>
+              <div className="avatar mt-3 mb-8">
+                <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                  <img
+                    src="https://a57.foxnews.com/static.foxbusiness.com/foxbusiness.com/content/uploads/2022/04/720/405/thumbnail_elon-musk-twitter-.jpg?ve=1&tl=1"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </section>
+            <p className="text-sm text-gray-400 mb-3">Student Dashboard</p>
             {/* <Student /> */}
             <li>
               <NavLink to="dashboard-home">
