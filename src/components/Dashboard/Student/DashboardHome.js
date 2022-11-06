@@ -50,6 +50,58 @@ const DashboardHome = () => {
           ))}
         </div>
       </section>
+
+      <section className="flex mt-9">
+        <section className=" border rounded">
+          {/* Title */}
+          <div className="p-5 text-center  bg-blue-400 text-white rounded-t-md">
+            <p className="text-xl">Class Teacher </p>
+          </div>
+          <section className="p-4">
+            <div className=" flex flex-col justify-between border rounded shadow-md px-16 pt-3 pb-28">
+              <div className="flex flex-col justify-center items-center mt-4 ">
+                <div className="avatar">
+                  <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                    <img
+                      src="https://cdn.britannica.com/99/236599-050-1199AD2C/Mark-Zuckerberg-2019.jpg"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <p className="pt-4 font-bold">Soliman Sukhun</p>
+                <p>Bangladesh National Create Player</p>
+              </div>
+              <div className="flex justify-center items-center gap-2 mt-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                  />
+                </svg>
+
+                <p className="text-blue-500 text-center">
+                  <a
+                    href="mailto:soliman@school.com"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    soliman@school.com
+                  </a>
+                </p>
+              </div>
+            </div>
+          </section>
+        </section>
+        <section>Routine</section>
+      </section>
     </section>
   );
 };
