@@ -13,6 +13,8 @@ import Main from "./components/Dashboard/Main/Main";
 import Signup from "./components/Auth/Signup";
 import ResetPass from "./components/Auth/ResetPass";
 import { Toaster } from "react-hot-toast";
+import Dashboard from "./components/Dashboard/Dashboard";
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
 
 function App() {
   return (
@@ -31,6 +33,15 @@ function App() {
         <Route path="/Quiz" element={<Quiz />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/reset-pass" element={<ResetPass />} />
+        {/* Protected Route */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        ></Route>
       </Routes>
     </div>
   );
