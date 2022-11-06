@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Card from "./Card";
 
 const DashboardHome = () => {
@@ -30,27 +29,28 @@ const DashboardHome = () => {
     },
   ];
   return (
-    <>
-      <section className="flex ">
-        {demoData.map(({ number, name, referText, referPath }, index) => (
-          <Card
-            key={index}
-            name={name}
-            number={number}
-            referText={referText}
-            referPath={referPath}
-          />
-        ))}
-        {/* <div className="border shadow-md px-20 py-12 flex flex-col justify-center items-center">
-          <p className="text-4xl text-cyan-600 font-medium">4.25</p>
-          <p className="text-base text-gray-500 mt-3">Current GPA</p>
-          <div className="divider"></div>
-          <Link to="/dashboard/grades" className="text-cyan-500">
-            See Full MarkSheet
-          </Link>
-        </div> */}
+    <section>
+      <section className=" pt-7 pb-6 px-3 border shadow-md">
+        {/* Alert Section */}
+        <div className="flex justify-center mb-5">
+          <p className="bg-sky-100 text-blue-900 text-xl px-8 py-6 w-2/3 rounded border border-l-8 border-l-blue-400">
+            <span className="font-bold">Info:</span> Please, Collect your Admit
+            card from account office.
+          </p>
+        </div>
+        <div className="flex ">
+          {demoData.map(({ number, name, referText, referPath }, index) => (
+            <Card
+              key={index}
+              name={name}
+              number={number}
+              referText={referText}
+              referPath={referPath}
+            />
+          ))}
+        </div>
       </section>
-    </>
+    </section>
   );
 };
 
