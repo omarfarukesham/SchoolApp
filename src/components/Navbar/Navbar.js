@@ -107,7 +107,7 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li tabIndex={0}>
-              <Link to="/dashboard">
+              <Link to="/dashboard/dashboard-home">
                 Dashboard
                 <svg
                   className="fill-current"

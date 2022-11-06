@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Admin from "./components/Dashboard/Admin/Admin";
 import Student from "./components/Dashboard/Student/Student";
@@ -15,6 +15,11 @@ import ResetPass from "./components/Auth/ResetPass";
 import { Toaster } from "react-hot-toast";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
+import DashboardHome from "./components/Dashboard/Student/DashboardHome";
+import Grades from "./components/Dashboard/Student/Grades";
+import StudentLedger from "./components/Dashboard/Student/StudentLedger";
+import OnlinePayment from "./components/Dashboard/Student/OnlinePayment";
+import Notice from "./components/Dashboard/Student/Notice";
 
 function App() {
   return (
@@ -36,13 +41,23 @@ function App() {
         <Route path="/reset-pass" element={<ResetPass />} />
         {/* Protected Route */}
         <Route
-          path="/dashboard"
+          path="dashboard"
           element={
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
           }
-        ></Route>
+        >
+          <Route
+            path="dashboard"
+            element={<Navigate replace to="dashboard-home" />}
+          />
+          <Route path="dashboard-home" element={<DashboardHome />} />
+          <Route path="grades" element={<Grades />} />
+          <Route path="student-ledger" element={<StudentLedger />} />
+          <Route path="online-payment" element={<OnlinePayment />} />
+          <Route path="notice" element={<Notice />} />
+        </Route>
       </Routes>
     </div>
   );
