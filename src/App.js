@@ -14,6 +14,7 @@ import Signup from "./components/Auth/Signup";
 import ResetPass from "./components/Auth/ResetPass";
 import { Toaster } from "react-hot-toast";
 import Dashboard from "./components/Dashboard/Dashboard";
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/main" element={<Main />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path="/student" element={<Student />} />
         <Route path="/teacher" element={<Teacher />} />
         <Route path="/admin" element={<Admin />} />
@@ -33,6 +34,15 @@ function App() {
         <Route path="/Quiz" element={<Quiz />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/reset-pass" element={<ResetPass />} />
+        {/* Protected Route */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        ></Route>
       </Routes>
     </div>
   );
