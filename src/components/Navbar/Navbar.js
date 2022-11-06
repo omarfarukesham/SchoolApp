@@ -8,7 +8,7 @@ import { useState } from "react";
 const Navbar = () => {
   const [user] = useAuthState(auth);
   const [isOpen, setIsOpen] = useState(false);
-  console.log(isOpen);
+
   return (
     <>
       <div className="navbar bg-gray-800 z-10 sticky top-0">
@@ -20,7 +20,6 @@ const Navbar = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 text-white"
                 onClick={() => setIsOpen(!isOpen)}
-                // onClick={(e) => }
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -44,7 +43,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li tabIndex={0}>
-                  <Link to="/main">
+                  <Link to="/dashboard">
                     Dashboard
                     <svg
                       className="fill-current"
@@ -108,7 +107,7 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li tabIndex={0}>
-              <Link to="/main">
+              <Link to="/dashboard/dashboard-home">
                 Dashboard
                 <svg
                   className="fill-current"
@@ -121,7 +120,7 @@ const Navbar = () => {
                 </svg>
               </Link>
               <ul className="p-2 bg-gray-800">
-                <li>
+                {/* <li>
                   <Link to="/student">Student</Link>
                 </li>
                 <li>
@@ -129,7 +128,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link to="/admin">Admin</Link>
-                </li>
+                </li> */}
               </ul>
             </li>
             <li>

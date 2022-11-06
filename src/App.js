@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Admin from "./components/Dashboard/Admin/Admin";
 import Student from "./components/Dashboard/Student/Student";
@@ -13,6 +13,13 @@ import Main from "./components/Dashboard/Main/Main";
 import Signup from "./components/Auth/Signup";
 import ResetPass from "./components/Auth/ResetPass";
 import { Toaster } from "react-hot-toast";
+import Dashboard from "./components/Dashboard/Dashboard";
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
+import DashboardHome from "./components/Dashboard/Student/DashboardHome";
+import Grades from "./components/Dashboard/Student/Grades";
+import StudentLedger from "./components/Dashboard/Student/StudentLedger";
+import OnlinePayment from "./components/Dashboard/Student/OnlinePayment";
+import Notice from "./components/Dashboard/Student/Notice";
 
 function App() {
   return (
@@ -23,6 +30,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/main" element={<Main />} />
+        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path="/student" element={<Student />} />
         <Route path="/teacher" element={<Teacher />} />
         <Route path="/admin" element={<Admin />} />
@@ -31,6 +39,25 @@ function App() {
         <Route path="/Quiz" element={<Quiz />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/reset-pass" element={<ResetPass />} />
+        {/* Protected Route */}
+        <Route
+          path="dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        >
+          <Route
+            path="dashboard"
+            element={<Navigate replace to="dashboard-home" />}
+          />
+          <Route path="dashboard-home" element={<DashboardHome />} />
+          <Route path="grades" element={<Grades />} />
+          <Route path="student-ledger" element={<StudentLedger />} />
+          <Route path="online-payment" element={<OnlinePayment />} />
+          <Route path="notice" element={<Notice />} />
+        </Route>
       </Routes>
     </div>
   );
