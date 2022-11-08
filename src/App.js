@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Admin from "./components/Dashboard/Admin/Admin";
-import Student from "./components/Dashboard/Student/Student";
+// import Student from "./components/Dashboard/Student/Student";
 import Teacher from "./components/Dashboard/Teacher/Teacher";
 import Resource from "./components/eResourcs/Resource";
 import Chat from "./components/SocialChat/Chat";
@@ -31,7 +31,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/main" element={<Main />} />
         {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-        <Route path="/student" element={<Student />} />
+        {/* <Route path="/student" element={<Student />} /> */}
         <Route path="/teacher" element={<Teacher />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/resource" element={<Resource />} />
