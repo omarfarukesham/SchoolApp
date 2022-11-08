@@ -57,9 +57,9 @@ const Navbar = () => {
                   </Link>
                   <ul className="p-2 bg-base-200">
                     <li>
-                      <Link onClick={() => setIsOpen(false)} to="/student">
+                      {/* <Link onClick={() => setIsOpen(false)} to="/student">
                         Student
-                      </Link>
+                      </Link> */}
                     </li>
                     <li>
                       <Link onClick={() => setIsOpen(false)} to="/teacher">
