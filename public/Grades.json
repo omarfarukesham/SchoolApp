@@ -1,0 +1,26 @@
+[
+    {
+        "id":1,
+        "subject":"Bangla",
+        "theory":54,
+        "practical":"NA",
+        "grade":"B"
+    },
+
+    {
+        "id":2,
+        "subject":"English",
+        "theory":66,
+        "practical":"NA",
+        "grade":"A"
+    },
+
+    {
+        "id":4,
+        "subject":"Math",
+        "theory":83,
+        "practical":"NA",
+        "grade":"A"
+    }
+]
+
