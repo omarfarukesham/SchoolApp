@@ -3,7 +3,7 @@ import React from 'react';
 const EResource = ({resource}) => {
       const {name,image,Class}=resource
     return (
-        <div class="card card-compact w-96 bg-white text-black shadow-xl container mx-auto mb-3">
+        <div class="card card-compact w-96 text-black shadow-xl container mx-auto mb-3">
             <div class="card-body">
                 <img src={image} className="w-1/2 mx-auto rounded-xl" alt="" />
                 <h2 class="text-3xl font-bold text-center border-b-2 border-indigo-500 py-2 ">{name}</h2>
